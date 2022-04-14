@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/psr-http-message-bridge": "^2.1",
+        "nyholm/psr7": "^1.5",
+        "zendframework/zend-diactoros": "^1.3"
+    }
+}
