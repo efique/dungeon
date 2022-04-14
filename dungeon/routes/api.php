@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/inscription', [DungeonController::class, 'inscription']);
 
-Route::post('/generic', [DungeonController::class, 'genericRequest']);
+Route::get('/generic', [DungeonController::class, 'genericRequest']);
