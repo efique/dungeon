@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class DungeonController extends Controller
 {
-    public function inscription()
+    public function inscription(Request $request)
     {
         $client = new Guzzle;
-        $res = $client->get('http://141.95.153.155/inscription', ['headers' => ['Authorization' => 'Basic dG90bzp0b3Rv']]);
+        $res = $client->get($request['url'], ['headers' => ['Authorization' => 'Basic ' . $request['token']]]);
 
         $data['x-auth-token'] = $res->getHeaders()['x-subject-token'];
         $data['message'] = $res->getBody()->getContents();
