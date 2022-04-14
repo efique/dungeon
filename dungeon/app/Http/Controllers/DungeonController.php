@@ -18,15 +18,15 @@ class DungeonController extends Controller
         return $data;
     }
 
-    public function genericRequest($url, $token, $method, $body = null)
+    public function genericRequest(Request $request)
     {
         $client = new Guzzle;
-        if ($method == 'get') {
-            $res = $client->get($url, ['headers' => ['x-auth-token' => $token]]);
-        } else if ($method == 'post') {
-            $res = $client->post($url, ['headers' => ['x-auth-token' => $token], 'body' => $body]);
-        } else if ($method == 'delete') {
-            $res = $client->delete($url, ['headers' => ['x-auth-token' => $token]]);
+        if ($request['method'] == 'get') {
+            $res = $client->get($request['url'], ['headers' => ['x-auth-token' => $request['token']]]);
+        } else if ($request['method'] == 'post') {
+            $res = $client->post($request['url'], ['headers' => ['x-auth-token' => $request['token']], 'body' => $request['body']]);
+        } else if ($request['method'] == 'delete') {
+            $res = $client->delete($request['url'], ['headers' => ['x-auth-token' => $request['token']]]);
         }
 
         $data['message'] = $res->getBody()->getContents();
