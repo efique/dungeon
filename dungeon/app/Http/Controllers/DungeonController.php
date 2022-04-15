@@ -32,13 +32,13 @@ class DungeonController extends Controller
                 $res = $client->delete($request['url'], ['headers' => ['x-auth-token' => $request['token']]]);
             }
 
-            // if ($request['json']) {
-            //     $data = json_decode($res->getBody()->getContents());
-            // } else {
             $data = $res->getBody()->getContents();
-            // }
 
-            return response()->json($data);
+            if ($res->hasHeader('Content-type')) {
+                $contenttype = $res->getHeader('Content-type');
+            }
+
+            return response($data)->header('Content-type', $contenttype);
         } catch (GuzzleError $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
