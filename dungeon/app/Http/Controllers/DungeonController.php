@@ -34,11 +34,13 @@ class DungeonController extends Controller
 
             $data = $res->getBody()->getContents();
 
-            if ($res->hasHeader('Content-type')) {
-                $contenttype = $res->getHeader('Content-type');
+            $isJson = json_decode($data, true);
+            if ($isJson !== null) {
+                return response($data)->header('Content-type', 'application/json');
+            } else {
+                $jsonified = array("message" => $data);
+                return response()->json($jsonified);
             }
-
-            return response($data)->header('Content-type', $contenttype);
         } catch (GuzzleError $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
