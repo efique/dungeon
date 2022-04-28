@@ -27,7 +27,7 @@ class DungeonController extends Controller
             if ($request['method'] == 'get') {
                 $res = $client->get($request['url'], ['headers' => ['x-auth-token' => $request['token']]]);
             } else if ($request['method'] == 'post') {
-                $res = $client->post($request['url'], ['headers' => ['x-auth-token' => $request['token']], 'body' => $request['body']]);
+                $res = $client->post($request['url'], ['headers' => ['x-auth-token' => $request['token']], 'body' => "idempotent"]);
             } else if ($request['method'] == 'delete') {
                 $res = $client->delete($request['url'], ['headers' => ['x-auth-token' => $request['token']]]);
             }
